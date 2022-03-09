@@ -10,6 +10,7 @@ import {
   SignIn,
   SignUp,
   ForgotPassword,
+  Category,
 } from "./pages";
 
 import { Navbar, PrivateRoute } from "./components";
@@ -21,6 +22,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Explore />} />
           <Route path="/offers" element={<Offers />} />
+          <Route path="/category/:categoryName" element={<Category />} />
           <Route path="/profile" element={<PrivateRoute />}>
             <Route path="/profile" element={<Profile />} />
           </Route>
