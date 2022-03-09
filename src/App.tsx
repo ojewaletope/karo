@@ -12,7 +12,7 @@ import {
   ForgotPassword,
 } from "./pages";
 
-import { Navbar } from "./components";
+import { Navbar, PrivateRoute } from "./components";
 
 const App = () => {
   return (
@@ -21,7 +21,10 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Explore />} />
           <Route path="/offers" element={<Offers />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<PrivateRoute />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+
           <Route path="/login" element={<SignIn />} />
           <Route path="/register" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
