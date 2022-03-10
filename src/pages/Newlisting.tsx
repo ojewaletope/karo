@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 import { Spinner } from "../components";
 
-import { NewListing } from "../models/model";
+import { Geolocation, NewListing } from "../models/model";
+
+import { toast } from "react-toastify";
 
 export const Newlisting = () => {
   const [formData, setFormData] = useState<NewListing>({} as NewListing);
@@ -30,6 +32,7 @@ export const Newlisting = () => {
     latitude,
     longitude,
     images,
+    address,
   } = formData;
   formData.name = "";
   useEffect(() => {
@@ -49,9 +52,45 @@ export const Newlisting = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMounted]);
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+
+    const geoCodeApiKey = process.env.REACT_APP_GEOCODE_API_KEY;
+
+    if (discountedPrice >= regularPrice) {
+      return toast.error("Discounted price should be less than regular price");
+    }
+
+    if (images.length > 6) {
+      return toast.error("Maximum of 6 images");
+    }
+
+    let geolocation: Geolocation = {};
+    let location: string;
+
+    if (geolocationEnabled) {
+      const response = await fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${geoCodeApiKey}`
+      );
+      const data = await response.json();
+      geolocation.latitude = data.results[0]?.geometry.location.lat ?? 0;
+      geolocation.longitude = data.results[0]?.geometry.location.lng ?? 0;
+      location =
+        data.status === "ZERO_RESULTS"
+          ? undefined
+          : data.results[0]?.formatted_address;
+
+      if (location === undefined || location.includes("undefined")) {
+        return toast.error("Please enter a correct address");
+      }
+    } else {
+      geolocation.latitude = latitude;
+      geolocation.longitude = longitude;
+      location = address;
+    }
     console.log(formData);
+
+    // setLoading(true);
   };
 
   const handleChange = (e: React.SyntheticEvent) => {
@@ -220,12 +259,12 @@ export const Newlisting = () => {
           <textarea
             className="formInputAddress"
             id="address"
-            value={location}
+            value={address}
             onChange={handleChange}
             required
           />
 
-          {geolocationEnabled && (
+          {!geolocationEnabled && (
             <div className="formLatLng flex">
               <div>
                 <label className="formLabel">Latitude</label>

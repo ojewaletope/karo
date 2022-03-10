@@ -33,8 +33,8 @@ export interface LoggedInUserObject {
 }
 
 export interface Geolocation {
-  longitude: number;
-  latitude: number;
+  longitude?: number;
+  latitude?: number;
 }
 
 export interface Timestamp {
@@ -76,6 +76,7 @@ export interface NewListing {
   name: string;
   location: string;
   images: FileList;
+  address: string;
 }
 
 export interface ListingData {
