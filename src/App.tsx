@@ -11,6 +11,7 @@ import {
   SignUp,
   ForgotPassword,
   Category,
+  Newlisting,
 } from "./pages";
 
 import { Navbar, PrivateRoute } from "./components";
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/login" element={<SignIn />} />
           <Route path="/register" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/new-listing" element={<Newlisting />} />
           <Route path="*" element={<h2>Not found</h2>} />
         </Routes>
         <Navbar />

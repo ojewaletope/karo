@@ -5,3 +5,4 @@ export * from "./SignIn";
 export * from "./SignUp";
 export * from "./ForgotPassword";
 export * from "./Category";
+export * from "./Newlisting";

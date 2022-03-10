@@ -59,6 +59,25 @@ export interface Listing {
   location: string;
 }
 
+export interface NewListing {
+  discountedPrice: number;
+  bathroom: number;
+  parking: boolean;
+  regularPrice: number;
+  type: string;
+  offer: boolean;
+  longitude: number;
+  latitude: number;
+  userRef: string;
+  furnished: boolean;
+  imageUrls: string[];
+  timestamp: Timestamp;
+  bedroom: number;
+  name: string;
+  location: string;
+  images: FileList;
+}
+
 export interface ListingData {
   id: string;
   data: Listing;
