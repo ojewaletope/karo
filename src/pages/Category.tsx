@@ -11,7 +11,8 @@ import {
 } from "@firebase/firestore";
 import { db } from "../firebase";
 import { toast } from "react-toastify";
-import { Spinner } from "../components";
+import { ListingItem, Spinner } from "../components";
+import { ListingData } from "../models/model";
 
 export const Category = () => {
   const [listings, setListings] = useState<any[]>([]);
@@ -45,6 +46,8 @@ export const Category = () => {
             data: doc.data(),
           });
         });
+
+        console.log(JSON.stringify(listings));
         setListings(listings);
         setLoading(false);
       } catch (error) {
@@ -69,8 +72,12 @@ export const Category = () => {
         <>
           <main>
             <ul className="categoryListings">
-              {listings.map((listing) => (
-                <h3>{listing.data.name}</h3>
+              {listings.map((listing: ListingData) => (
+                <ListingItem
+                  listing={listing.data}
+                  id={listing.id}
+                  key={listing.id}
+                />
               ))}
             </ul>
           </main>

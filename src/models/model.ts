@@ -31,3 +31,35 @@ export interface LoggedInUserObject {
   kind: string;
   users: LoggedInUser[];
 }
+
+export interface Geolocation {
+  longitude: number;
+  latitude: number;
+}
+
+export interface Timestamp {
+  seconds: number;
+  nanoseconds: number;
+}
+
+export interface Listing {
+  discountedPrice: number;
+  bathroom: number;
+  parking: boolean;
+  regularPrice: number;
+  type: string;
+  offer: boolean;
+  geolocation: Geolocation;
+  userRef: string;
+  furnished: boolean;
+  imageUrls: string[];
+  timestamp: Timestamp;
+  bedroom: number;
+  name: string;
+  location: string;
+}
+
+export interface ListingData {
+  id: string;
+  data: Listing;
+}
