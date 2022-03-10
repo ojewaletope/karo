@@ -10,7 +10,7 @@ import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/keyboardArrowRightIcon.svg";
 import visibilityIcon from "../assets/svg/visibilityIcon.svg";
-import { TextField } from "../components";
+import { OAuth, TextField } from "../components";
 import { AuthDetails } from "../models/model";
 
 type FormObjProps = AuthDetails;
@@ -119,7 +119,8 @@ export const SignUp = () => {
             </button>
           </div>
         </form>
-        {/* google oauth */}
+
+        <OAuth />
 
         <Link to="/login" className="registerLink">
           Sign In Instead

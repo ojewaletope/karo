@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { getAuth, updateProfile } from "@firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import arrowRightIcon from "../assets/svg/keyboardArrowRightIcon.svg";
+import homeIcon from "../assets/svg/homeIcon.svg";
 // import { LoggedInUser } from "../models/model";
 
 export const Profile = (): JSX.Element => {
@@ -101,6 +103,11 @@ export const Profile = (): JSX.Element => {
             />
           </form>
         </div>
+        <Link to="/new-listing" className="createListing">
+          <img src={homeIcon} alt="home" />
+          <p>Sell or rent your home</p>
+          <img src={arrowRightIcon} alt="arrow right" />
+        </Link>
       </main>
     </div>
   );

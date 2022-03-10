@@ -10,9 +10,11 @@ import {
   SignIn,
   SignUp,
   ForgotPassword,
+  Category,
+  Newlisting,
 } from "./pages";
 
-import { Navbar } from "./components";
+import { Navbar, PrivateRoute } from "./components";
 
 const App = () => {
   return (
@@ -21,10 +23,15 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Explore />} />
           <Route path="/offers" element={<Offers />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/category/:categoryName" element={<Category />} />
+          <Route path="/profile" element={<PrivateRoute />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+
           <Route path="/login" element={<SignIn />} />
           <Route path="/register" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/new-listing" element={<Newlisting />} />
           <Route path="*" element={<h2>Not found</h2>} />
         </Routes>
         <Navbar />
